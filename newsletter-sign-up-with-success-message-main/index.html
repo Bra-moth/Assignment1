@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <title>Frontend Mentor | Newsletter sign-up form with success message</title>
-
   <style>
-    html {
-      background-color: rgb(255, 255, 255);
-      min-height: 100vh;
-      body {
-      margin: 0;
-      min-height: 100vh;
+    /* Body styling */
+    body {
+      font-family: Arial, sans-serif;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: 
-        linear-gradient(
-          to bottom,
-          #ffffff 0%,
-          #060722 33%,
-          #1a1a40 33%,
-          #1a1a40 66%,
-          #141430 66%,
-          #ffffff 100%
-        );
+      min-height: 100vh;
+      margin: 0;
+      background-color: #060722c2;
     }
-  
 
+    /* Parent container for form and attribution */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem; /* Space between form and attribution */
+    }
+
+    /* Form container */
     .form-container {
       background-color: white;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       width: 100%;
-      max-width: 800px; /* Increased width to accommodate the image */
-      display: flex; /* Use Flexbox */
-      align-items: center; /* Vertically center content */
-      justify-content: space-between; /* Space between text and image */
+      max-width: 800px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .form-content {
-      flex: 1; /* Take up remaining space */
-      margin-right: 2rem; /* Add spacing between text and image */
+      flex: 1;
+      margin-right: 2rem;
     }
 
     h1 {
@@ -56,6 +53,7 @@
       display: flex;
       flex-direction: column;
       margin-bottom: 1rem;
+      position: relative;
     }
 
     label {
@@ -67,11 +65,12 @@
       border-radius: 4px;
       border: 1px solid #ddd;
       font-size: 1rem;
+      position: relative;
     }
 
     button {
       padding: 0.75rem;
-      background: linear-gradient(90deg, #ec2c5cd5, #ff8f4e); /* Gradient from light to dark */
+      background: linear-gradient(90deg, #ec2c5cd5, #ff8f4e);
       color: rgb(255, 255, 255);
       border: none;
       border-radius: 4px;
@@ -83,36 +82,11 @@
     }
 
     button:hover {
-      background-position: -100% 0; /* Move gradient to the left on hover */
-    }
-
-    .success-message {
-      display: none; /* Initially hidden */
-      text-align: left;
-    }
-
-    .success-message img {
-      margin-bottom: 1rem;
-    }
-
-    .dismiss-btn {
-      padding: 0.75rem;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-      width: 100%;
-      transition: background-color 0.3s;
-    }
-
-    .dismiss-btn:hover {
-      background-color: #45a049;
+      background-position: -100% 0;
     }
 
     ul {
-      list-style: none; /* Remove default list bullets */
+      list-style: none;
       padding: 0;
     }
 
@@ -123,75 +97,77 @@
     }
 
     li img {
-      margin-right: 0.75rem; /* Add spacing between icon and text */
-      width: 20px; /* Adjust icon size */
+      margin-right: 0.75rem;
+      width: 20px;
     }
 
     .attribution {
       font-size: 11px;
       text-align: center;
-      margin-top: 2rem;
+      color: white; /* Ensure visibility on dark background */
     }
 
     .attribution a {
       color: hsl(228, 45%, 44%);
     }
+
+    /* Error message styling (positioned to the top-right of the input) */
+    .error-message {
+      color: red;
+      font-size: 0.875rem;
+      position: absolute;
+      top: -20px;
+      right: 10px;
+    }
   </style>
 </head>
-
 <body>
+  <!-- Main container for form and attribution -->
+  <div class="main-container">
+    <!-- Sign-up form start -->
+    <div class="form-container" id="signup-form-container">
+      <div class="form-content">
+        <h1>Stay updated!</h1>
+        <p>Join 60,000+ product managers receiving monthly updates on:</p>
+        <ul>
+          <li>
+            <img src="./assets/images/icon-list.svg" alt="Checkmark icon">
+            Product discovery and building what matters
+          </li>
+          <li>
+            <img src="./assets/images/icon-list.svg" alt="Checkmark icon">
+            Measuring to ensure updates are a success
+          </li>
+          <li>
+            <img src="./assets/images/icon-list.svg" alt="Checkmark icon">
+            And much more!
+          </li>
+        </ul>
 
-  <!-- Sign-up form start -->
-  <div class="form-container" id="signup-form-container">
-    <div class="form-content">
-      <h1>Stay updated!</h1>
-      <p>Join 60,000+ product managers receiving monthly updates on:</p>
-      <ul>
-        <li>
-          <img src="./assets/images/icon-list.svg" alt="Checkmark icon">
-          Product discovery and building what matters
-        </li>
-        <li>
-          <img src="./assets/images/icon-list.svg" alt="Checkmark icon">
-          Measuring to ensure updates are a success
-        </li>
-        <li>
-          <img src="./assets/images/icon-list.svg" alt="Checkmark icon">
-          And much more!
-        </li>
-      </ul>
-
-      <form id="signup-form">
-        <div class="input-group">
-          <label for="email">Email address</label>
-          <input type="email" id="email" name="email" placeholder="email@company.com" required>
-        </div>
-        <button type="submit">Subscribe to monthly newsletter</button>
-      </form>
+        <form id="signup-form">
+          <div class="input-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="email@company.com" required>
+            <!-- Error message container -->
+            <div id="error-message" class="error-message"></div>
+          </div>
+          <button type="submit">Subscribe to monthly newsletter</button>
+        </form>
+      </div>
+      <img src="./assets/images/illustration-sign-up-desktop.svg" alt="Frontend Mentor logo" width="300">
     </div>
-    <img src="./assets/images/illustration-sign-up-desktop.svg" alt="Frontend Mentor logo" width="300">
-  </div>
 
-  <!-- Success message start -->
-  <div class="success-message" id="success-message" aria-live="polite">
-    <img src="./assets/images/icon-list.svg" alt="Checkmark icon" width="50">
-    <h1>Thanks for subscribing!</h1>
-    <p>A confirmation email has been sent to <span id="email-display"></span>. Please open it and click the button inside to confirm your subscription.</p>
-    <button class="dismiss-btn" onclick="dismissMessage()">Dismiss message</button>
-  </div>
-
-  <!-- Success message end -->
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Kabelo Gaotlhaelwe</a>.
-    Coded by <a href="#">Solomon Makuwa</a>.
+    <!-- Attribution -->
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Kabelo Gaotlhaelwe</a>.
+      Coded by <a href="#">Solomon Makuwa</a>.
+    </div>
   </div>
 
   <script>
     const form = document.getElementById('signup-form');
-    const successMessage = document.getElementById('success-message');
     const signupFormContainer = document.getElementById('signup-form-container');
-    const emailDisplay = document.getElementById('email-display');
+    const errorMessage = document.getElementById('error-message');  // Error message container
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();  // Prevent form submission
@@ -200,23 +176,74 @@
 
       // Basic email validation
       if (!validateEmail(email)) {
-        alert('Please enter a valid email address.');
+        errorMessage.textContent = 'Valid email required';  // Show error message
         return;
+      } else {
+        errorMessage.textContent = '';  // Clear error message if valid
       }
 
-      // Hide the sign-up form and show the success message
+      // Hide the sign-up form
       signupFormContainer.style.display = 'none';
-      successMessage.style.display = 'block';
-      emailDisplay.textContent = email;
+
+      // Create and display the success message
+      createSuccessMessage(email);
 
       // Reset the form
       form.reset();
     });
 
+    function createSuccessMessage(email) {
+      // Create the success message container
+      const successContainer = document.createElement('div');
+      successContainer.className = 'form-container';
+      successContainer.id = 'success-message';
+      successContainer.setAttribute('aria-live', 'polite');
+
+      // Create the success content
+      const successContent = document.createElement('div');
+      successContent.className = 'form-content';
+
+      // Add the checkmark icon
+      const checkmarkImg = document.createElement('img');
+      checkmarkImg.src = './assets/images/icon-list.svg';
+      checkmarkImg.alt = 'Checkmark icon';
+      checkmarkImg.width = 50;
+
+      // Add the heading
+      const heading = document.createElement('h1');
+      heading.textContent = 'Thanks for subscribing!';
+
+      // Add the confirmation message
+      const message = document.createElement('p');
+      message.innerHTML = `A confirmation email has been sent to <span id="email-display">${email}</span>. Please open it and click the button inside to confirm your subscription.`;
+
+      // Add the dismiss button
+      const dismissButton = document.createElement('button');
+      dismissButton.className = 'dismiss-btn';
+      dismissButton.textContent = 'Dismiss message';
+      dismissButton.onclick = dismissMessage;
+
+      // Append all elements to the success content
+      successContent.appendChild(checkmarkImg);
+      successContent.appendChild(heading);
+      successContent.appendChild(message);
+      successContent.appendChild(dismissButton);
+
+      // Append the success content to the container
+      successContainer.appendChild(successContent);
+
+      // Append the success container to the main container
+      const mainContainer = document.querySelector('.main-container');
+      mainContainer.insertBefore(successContainer, mainContainer.firstChild);
+    }
+
     function dismissMessage() {
-      // Hide the success message and show the sign-up form again
-      successMessage.style.display = 'none';
-      signupFormContainer.style.display = 'block';
+      // Remove the success message
+      const successMessage = document.getElementById('success-message');
+      successMessage.remove();
+
+      // Show the sign-up form again
+      signupFormContainer.style.display = 'flex';
     }
 
     function validateEmail(email) {
@@ -224,7 +251,5 @@
       return re.test(String(email).toLowerCase());
     }
   </script>
-
 </body>
-
 </html>
