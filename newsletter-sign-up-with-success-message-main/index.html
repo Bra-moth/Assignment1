@@ -113,12 +113,15 @@
 
     /* Error message styling (positioned to the top-right of the input) */
     .error-message {
-      color: red;
-      font-size: 0.875rem;
-      position: absolute;
-      top: -20px;
-      right: 10px;
-    }
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+  display: none; /* Hide the error message by default */
+}
+
+.input-group input:invalid {
+  border-color: red; /* Highlight the input field with a red border if invalid */
+}
   </style>
 </head>
 <body>
@@ -177,9 +180,11 @@
       // Basic email validation
       if (!validateEmail(email)) {
         errorMessage.textContent = 'Valid email required';  // Show error message
+        errorMessage.style.display = 'block'; // Display the error message
         return;
       } else {
         errorMessage.textContent = '';  // Clear error message if valid
+        errorMessage.style.display = 'none'; // Hide the error message
       }
 
       // Hide the sign-up form
@@ -235,6 +240,9 @@
       // Append the success container to the main container
       const mainContainer = document.querySelector('.main-container');
       mainContainer.insertBefore(successContainer, mainContainer.firstChild);
+
+      // Show the success message
+      successContainer.style.display = 'flex';
     }
 
     function dismissMessage() {
